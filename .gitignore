@@ -1,0 +1,3 @@
+venv/
+.env
+gmail_token.json
