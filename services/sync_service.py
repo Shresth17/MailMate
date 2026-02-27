@@ -42,3 +42,13 @@ text_splitter = RecursiveCharacterTextSplitter(chunk_size=CHUNK_SIZE, chunk_over
 valueble_prompt = PromptTemplate(input_variables=["mail_chunk"],template=IS_VALUABLE_PROMPT)
 
 
+def make_db_session():
+    global session
+    try:
+        engine = create_engine(os.getenv("DB_URI"))
+        Base.metadata.create_all(engine)
+        Session = sessionmaker(bind=engine)
+        session = Session()
+    except Exception as e:
+        print(e)
+
