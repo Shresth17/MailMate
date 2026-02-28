@@ -63,3 +63,17 @@ def make_chroma_session():
 
 
 # table for mails in the database
+class Mail(Base):
+    __tablename__ = 'mail'
+
+    message_id = Column(String, primary_key=True)
+    thread_id = Column(String)
+    sender = Column(String)
+    recipient = Column(String)
+    subject = Column(String)
+    date = Column(String)
+    message = Column(String)
+
+    def __repr__(self):
+        return f"<Mail(message_id={self.message_id}, sender={self.sender}, recipient={self.recipient}, subject={self.subject}, date={self.date})>\n\n"
+
