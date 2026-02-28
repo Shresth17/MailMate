@@ -52,3 +52,14 @@ def make_db_session():
     except Exception as e:
         print(e)
 
+def make_chroma_session():
+    global chromadb_instance
+    try:
+        chromadb_instance = chromadb.PersistentClient(path=os.getenv("CHROMA_DB_PATH"))
+
+    except Exception as e:
+        print(e)
+
+
+
+# table for mails in the database
