@@ -77,3 +77,16 @@ class Mail(Base):
     def __repr__(self):
         return f"<Mail(message_id={self.message_id}, sender={self.sender}, recipient={self.recipient}, subject={self.subject}, date={self.date})>\n\n"
 
+class Event(Base):
+    __tablename__ = 'event'
+
+    event_id = Column(Integer, primary_key=True)
+    event_name = Column(String)
+    event_date = Column(String)
+    event_time = Column(String)
+    event_venue = Column(String)
+    sender = Column(String)
+    
+    def __repr__(self):
+        return f"<Event(event_name={self.event_name}, event_date={self.event_date}, event_time={self.event_time}, event_venue={self.event_venue})>"
+    
