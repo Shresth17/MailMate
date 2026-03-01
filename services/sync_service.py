@@ -90,3 +90,22 @@ class Event(Base):
     def __repr__(self):
         return f"<Event(event_name={self.event_name}, event_date={self.event_date}, event_time={self.event_time}, event_venue={self.event_venue})>"
     
+def add_to_db(emails):
+    ic(emails)
+    ret = []
+    for email in emails:
+        mail = Mail(
+            message_id=email.id,
+            thread_id=email.thread_id,
+            sender=email.sender,
+            recipient=email.recipient,
+            subject=email.subject,
+            date=email.date,
+            message=email.plain,
+            # labels=str(email.labels)
+        )
+        ret.append(mail)
+        session.add(mail)
+        session.commit()
+    return ret
+
