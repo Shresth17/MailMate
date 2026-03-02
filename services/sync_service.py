@@ -109,3 +109,15 @@ def add_to_db(emails):
         session.commit()
     return ret
 
+def add_event_to_db(event):
+    print(event)
+    event = Event(
+        event_name=event["event_name"],
+        event_date=event["event_date"],
+        event_time=event["event_time"],
+        event_venue=event["event_venue"],
+        sender=event["sender"]
+    )
+    session.add(event)
+    session.commit()
+#get lastest added record to the database
