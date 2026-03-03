@@ -128,3 +128,19 @@ def get_latest_email_id():
         print(e)
         return None
 
+def format_email(mess):
+    pattern = r"(On (Sun|Mon|Tue|Wed|Thu|Fri|Sat))"
+    # Find the first occurrence of the pattern
+    match = re.search(pattern, mess)
+    if match:
+        # Get the starting index of the matched pattern
+        start_index = match.start()
+        # Return the substring of the message before the matched pattern
+        return mess[:start_index]
+    else:
+        # If the pattern is not found, return the original message
+        return mess
+
+        
+    
+
