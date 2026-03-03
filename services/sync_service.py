@@ -121,3 +121,10 @@ def add_event_to_db(event):
     session.add(event)
     session.commit()
 #get lastest added record to the database
+def get_latest_email_id():
+    try:
+        return session.query(Mail).order_by(Mail.message_id.desc()).first().message_id
+    except Exception as e:
+        print(e)
+        return None
+
