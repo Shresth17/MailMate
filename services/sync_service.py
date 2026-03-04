@@ -144,3 +144,33 @@ def format_email(mess):
         
     
 
+def sync_emails(gmail_client : Gmail):
+    query_params = {
+        "newer_than": (10, "day"),
+    }
+    emails = gmail_client.get_messages(query=construct_query(query_params))
+    latest_email_id = get_latest_email_id()
+    # print("Latest email id: ", latest_email_id)
+    #only add new emails to the database
+    corrupted_emails,latest_emails = [],[]
+    for email in emails:
+        if email.id == latest_email_id:
+            break
+        corrupted_emails.append(email)
+    ic(corrupted_emails)
+    for email in corrupted_emails:
+        cur_thread = email.thread_id
+        #find if thread id is already in the database
+        thread = session.query(Mail).filter(Mail.thread_id == cur_thread).first()
+        if thread:
+            print("before mail: ", email.plain)
+            latest_email = format_email(email.plain)
+            print("after mail: ", latest_email)
+            email.plain = latest_email
+            latest_emails.append(email)
+        else:
+            print("thread not found")
+            latest_emails.append(email)
+    return add_to_db(latest_emails)
+
+
