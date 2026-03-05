@@ -188,3 +188,9 @@ def print_only(emails):
 
 
 
+def split_mail(mail):
+    return text_splitter.split_text(mail)
+
+def embed_mail(chunks):
+    return embeddings.embed_documents(chunks)
+
