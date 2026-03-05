@@ -174,3 +174,17 @@ def sync_emails(gmail_client : Gmail):
     return add_to_db(latest_emails)
 
 
+def print_only(emails):
+    for email in emails:
+        print("Message ID: ", email.message_id)
+        # print("Thread ID: ", email.thread_id)
+        # print("Sender: ", email.sender)
+        # print("Recipient: ", email.recipient)
+        print("Subject: ", email.subject)
+        print("Date: ", email.date)
+        #get labels
+        print("Labels: ", email.labels)
+        
+
+
+
