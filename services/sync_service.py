@@ -210,3 +210,21 @@ def is_valuable(chunk):
         print(e)
         return False
 
+def classify_event(mail_str):
+    try:
+        prompt = PromptTemplate(input_variables=["mail_chunk"],template=EVENT_CLASSIFIER_PROMPT)
+        llm = ChatOpenAI(model_name="gpt-4")
+        output = prompt | llm
+        response = output.invoke({"mail_chunk": mail_str})
+        response = response.content
+        response = response.strip().lower()
+        print(response)
+        if "yes" in response:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
+
