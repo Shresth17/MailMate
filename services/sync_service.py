@@ -194,3 +194,19 @@ def split_mail(mail):
 def embed_mail(chunks):
     return embeddings.embed_documents(chunks)
 
+def is_valuable(chunk):
+    try:
+        prompt = valueble_prompt
+        llm = OpenAI(temperature=0.0)
+        output = prompt | llm
+        response = output.invoke({"mail_chunk": chunk})
+        response = response.strip().lower()
+        print(response)
+        if "true" in response:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(e)
+        return False
+
