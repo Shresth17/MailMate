@@ -228,3 +228,22 @@ def classify_event(mail_str):
         return False
 
 
+def get_event_data(mail_str,sender):
+    try:
+        prompt = PromptTemplate(input_variables=["mail_chunk"],template=IS_EVENT_PROMPT)
+        llm = ChatOpenAI(model_name="gpt-4")
+        output = prompt | llm
+        response = output.invoke({"mail_chunk": mail_str})
+        # response = response.strip().lower()
+        response=response.content
+        response = response.strip().lower()
+        print(response)
+        json_response = json.loads(response)
+        json_response["sender"] = sender
+        add_event_to_db(json_response)
+        return True
+    except Exception as e:
+        print(e)
+        return False
+
+
