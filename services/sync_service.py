@@ -257,3 +257,11 @@ def store_embeddings(chunks, embeddings):
 
 
 
+def get_db_emails():
+    all_emails = session.query(Mail).all()
+    # print_only(all_emails)
+    return all_emails[10]
+
+def get_latest_email():
+    return session.query(Mail).order_by(Mail.date.desc()).first()
+
