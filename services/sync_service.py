@@ -247,3 +247,13 @@ def get_event_data(mail_str,sender):
         return False
 
 
+def store_embeddings(chunks, embeddings):
+    collection = chromadb_instance.get_or_create_collection(COLLECTION_NAME,
+                                                        metadata={"hnsw:space": SIMILARITY_SEARCH_TYPE})
+    ids = [str(uuid.uuid1()) for _ in range(len(chunks))]
+    for i, chunk in enumerate(chunks):
+        collection.add(documents=chunk, embeddings=embeddings[i], ids=[ids[i]])
+    return ids
+
+
+
