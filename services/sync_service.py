@@ -265,3 +265,14 @@ def get_db_emails():
 def get_latest_email():
     return session.query(Mail).order_by(Mail.date.desc()).first()
 
+def refine_chunks(chunks, mail):
+    mail_metadata = "From: " + mail.sender + "\n" + "To: " + mail.recipient + "\n" + "Subject: " + mail.subject + "\n" + "Date: " + mail.date + "\n\n Message: \n"
+    new_chunks = []
+    event_chunks = []
+    for chunk in chunks:
+        if is_valuable(chunk):
+            event_chunks.append(chunk)
+            chunk = mail_metadata + chunk
+            new_chunks.append(chunk)
+    return new_chunks,event_chunks
+
