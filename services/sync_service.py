@@ -276,3 +276,16 @@ def refine_chunks(chunks, mail):
             new_chunks.append(chunk)
     return new_chunks,event_chunks
 
+def main_loop():
+    new_mails = sync_emails(gmail)
+    print(new_mails)
+    for mail in new_mails:
+        print(mail)
+        chunks = split_mail(mail.message)
+        chunks,event_chunks = refine_chunks(chunks, mail)
+        mail_string = ' '.join(event_chunks)
+        if classify_event(mail_string):
+            get_event_data(mail_string,mail.sender)
+        mail_embeddings = embed_mail(chunks)
+        store_embeddings(chunks, mail_embeddings)
+
