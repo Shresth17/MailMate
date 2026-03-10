@@ -289,3 +289,13 @@ def main_loop():
         mail_embeddings = embed_mail(chunks)
         store_embeddings(chunks, mail_embeddings)
 
+if __name__ == "__main__":
+    make_db_session()
+    make_chroma_session()
+    gmail = Gmail(
+        client_secret_file="../client_secret.json",
+        creds_file="../gmail_token.json",
+    )
+    while True:
+        main_loop()
+        time.sleep(60)
