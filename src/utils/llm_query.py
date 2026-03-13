@@ -35,3 +35,19 @@ def get_embedding(text: str):
     return embeddings.embed_query(text)
 
 
+def similarity_search(query: str):
+    query_embedding = get_embedding(query)
+    collection = chromadb_instance.get_collection(COLLECTION_NAME)
+    results = collection.query(
+        query_embeddings=[query_embedding],
+        n_results=4,
+    )
+    return results
+
+def query_response(query: str):
+    context = similarity_search(query)
+    llm = ChatOpenAI(model_name="gpt-4")
+    output = query_prompt | llm
+    response = output.invoke({"context": context, "question": query})
+    return response.content
+
