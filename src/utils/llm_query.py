@@ -31,3 +31,7 @@ chat_openai = ChatOpenAI(model_name="gpt-4")
 query_prompt = PromptTemplate(template=RAG_PROMPT, input_variables=["context", "question"])
 
 
+def get_embedding(text: str):
+    return embeddings.embed_query(text)
+
+
