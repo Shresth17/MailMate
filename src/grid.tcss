@@ -1,0 +1,15 @@
+Screen {
+    layout: horizontal;
+}
+
+.box {
+    height: 100%;
+    width: 1fr;
+    border: solid green;
+}
+
+#chat-bot-response-button {
+    width: 100%;
+    text-align: center;
+    background: blue;
+}
