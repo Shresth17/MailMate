@@ -58,3 +58,9 @@ class CollapsibleApp(Static):
         for child in self.walk_children(Collapsible):
             child.collapsed = collapse
 
+class ResponseBox(Static):
+    query = reactive("")
+    
+    def on_mount(self, event: Mount) -> None:
+        self.update("Please enter a query above and click submit")
+
