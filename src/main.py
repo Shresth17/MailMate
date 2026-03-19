@@ -39,3 +39,22 @@ class TableApp(Static):
         table.add_columns(*Rows[0])
         table.add_rows(Rows[1:])
 
+class CollapsibleApp(Static):
+    """An example of collapsible container."""
+
+    BINDINGS = [
+        ("c", "collapse_or_expand(True)", "Collapse All"),
+        ("e", "collapse_or_expand(False)", "Expand All"),
+    ]
+
+    def compose(self) -> ComposeResult:
+        """Compose app with collapsible containers."""
+        for mail in all_mails:
+            with Collapsible(collapsed=True, title=mail["subject"]):
+                yield Label(f"From: {mail['from']}      Time: {mail['time']}\n{mail['subject']}\n{mail['message']}\n")
+                            
+
+    def action_collapse_or_expand(self, collapse: bool) -> None:
+        for child in self.walk_children(Collapsible):
+            child.collapsed = collapse
+
