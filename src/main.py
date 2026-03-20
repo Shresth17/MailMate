@@ -64,3 +64,22 @@ class ResponseBox(Static):
     def on_mount(self, event: Mount) -> None:
         self.update("Please enter a query above and click submit")
 
+class ChatResponse(Static):
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        """Event handler called when a button is pressed."""
+        button_id = event.button.id
+        text_display = self.query_one(ResponseBox)
+        text_area = self.query_one(TextArea)
+        input_text = text_area.text
+        text_area.text = ""
+        text_display.update(query_response(input_text))
+    def compose(self) -> ComposeResult:
+        with Vertical():
+            with ScrollableContainer():
+                yield TextArea(id="chat-input")
+                yield Button("Submit Query", id="chat-bot-response-button")
+                yield ResponseBox(id="chat-bot-response")
+
+    def on_mount(self) -> None:
+        pass
+
