@@ -83,3 +83,11 @@ class ChatResponse(Static):
     def on_mount(self) -> None:
         pass
 
+class ChatComponent(Static):
+    def compose(self) -> ComposeResult:
+        with Vertical():
+            yield ChatResponse()
+
+    def on_mount(self) -> None:
+        pass
+
