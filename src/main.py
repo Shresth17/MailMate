@@ -91,3 +91,12 @@ class ChatComponent(Static):
     def on_mount(self) -> None:
         pass
 
+class MainApp(App):
+    CSS_PATH = "grid.tcss"
+    def compose(self) -> ComposeResult:
+        yield ScrollableContainer(Static("All Emails"),CollapsibleApp())
+        yield Vertical(Static("Chat Bot"), ChatComponent(classes="box"))
+        yield ScrollableContainer(Static("All Events"),TableApp())
+        yield Footer()
+
+
