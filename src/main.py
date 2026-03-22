@@ -100,3 +100,6 @@ class MainApp(App):
         yield Footer()
 
 
+if __name__ == "__main__":
+    app = MainApp()
+    app.run()
