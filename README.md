@@ -1,4 +1,4 @@
-# MailMate
+﻿# MailMate
 
 MailMate is an AI-powered terminal assistant for reading inbox threads, syncing Gmail data locally, and answering questions about your email history.
 
@@ -69,3 +69,7 @@ python3 main.py
 ```
 
 Wait a few minutes before starting the CLI the first time, since the sync service may need time to download messages.
+
+## Maintainer
+
+Shresth Sharma
