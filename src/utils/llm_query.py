@@ -51,3 +51,7 @@ def query_response(query: str):
     response = output.invoke({"context": context, "question": query})
     return response.content
 
+
+if __name__ == "__main__":
+    query = "Is there any talk on Knowledge production or creation of new knowledge scheduled?"
+    print(query_response(query))
