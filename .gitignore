@@ -1,3 +1,8 @@
+__pycache__/
 venv/
 .env
 gmail_token.json
+client_secret.json
+chroma.db
+services/__pycache__/
+*.pyc
